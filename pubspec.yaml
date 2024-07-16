@@ -9,5 +9,12 @@ dependencies:
   flutter:
     sdk: flutter
   material: any  # Always use the latest available version
+
+flutter:
+  assets:
+    - Assets/icons/Logo.jpg
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages. # Always use the latest available version
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
