@@ -1,8 +1,7 @@
-
 // Current SDK version: 3.22.1
 import 'package:flutter/material.dart';
 
-// ListView, Gridview, SizedBox, ListTile, Divider
+// TextField
 
 void main() {
   runApp(IntroApp());
@@ -14,9 +13,110 @@ class IntroApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       home: Home(),
       title: 'Intro app',
+      theme: ThemeData(
+          brightness: Brightness.light,
+          appBarTheme: AppBarTheme(
+              backgroundColor: Colors.pink,
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.2
+              )
+          ),
+          textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                  foregroundColor: Colors.pink,
+                  textStyle: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700
+                  )
+              )
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                    color: Colors.green,
+                    width: 2
+                )
+            ),
+            disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                    color: Colors.green,
+                    width: 2
+                )
+            ),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                    color: Colors.blueAccent,
+                    width: 2
+                )
+            ),
+            labelStyle: TextStyle(
+                fontSize: 16
+            ),
+            hintStyle: TextStyle(
+                color: Colors.purple.shade200
+            ),
+          )
+      ),
+      darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          appBarTheme: AppBarTheme(
+              backgroundColor: Colors.green,
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.2
+              )
+          ),
+          textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                  foregroundColor: Colors.green,
+                  textStyle: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700
+                  )
+              )
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                    color: Colors.green,
+                    width: 2
+                )
+            ),
+            disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                    color: Colors.green,
+                    width: 2
+                )
+            ),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                    color: Colors.blueAccent,
+                    width: 2
+                )
+            ),
+            labelStyle: TextStyle(
+                fontSize: 16
+            ),
+            hintStyle: TextStyle(
+                color: Colors.purple.shade200
+            ),
+          )
+      ),
+      themeMode: ThemeMode.dark,
     );
   }
 }
@@ -29,232 +129,120 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<String> friendList = ['Fahad', 'Iram', 'Touhid', 'Sakib', 'Niloy'];
+  TextEditingController _descriptionTEController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+        // backgroundColor: Colors.blue,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                enabled: true,
+                decoration: InputDecoration(
+                  label: Text('Name'),
+                  labelStyle: TextStyle(
+                      fontSize: 16
+                  ),
+                  hintText: 'Enter your name',
+                  hintStyle: TextStyle(
+                      color: Colors.green.shade200
+                  ),
+                  icon: Icon(Icons.add),
+                  prefixIcon: Icon(Icons.search),
+                  suffixIcon: TextButton(
+                    child: Text('Search'),
+                    onPressed: () {},
+                  ),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                          color: Colors.green,
+                          width: 2
+                      )
+                  ),
+                  disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                          color: Colors.green,
+                          width: 2
+                      )
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                          color: Colors.blueAccent,
+                          width: 2
+                      )
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
+              TextField(
+                controller: _descriptionTEController,
+                enabled: true,
+                maxLines: 5,
+                maxLength: 200,
+                onTap: () {
+                  print('Tapped on textfield');
+                },
+                onChanged: (String value) {
+                  print(value);
+                },
+                decoration: InputDecoration(
+                  label: Text('Description'),
+                  labelStyle: TextStyle(
+                      fontSize: 16
+                  ),
+                  hintText: 'Enter your description',
+                ),
+              ),
+              SizedBox(height: 16),
+              TextField(
+                enabled: true,
+                onChanged: (String value) {
+                  print(value);
+                },
+                obscureText: true,
+                controller: TextEditingController(),
+                decoration: InputDecoration(
+                  label: Text('Password'),
+                  labelStyle: TextStyle(
+                      fontSize: 16
+                  ),
+                  hintText: 'Enter your password',
+                ),
+              ),
+              SizedBox(height: 16),
+              TextField(),
+              TextButton(onPressed: () {
+                // _descriptionTEController.text = 'clear';
+                _descriptionTEController.clear();
+              }, child: Text('Clear description'))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Home'),
-        backgroundColor: Colors.blue,
+        title: Text('Settings'),
       ),
-      // body: ListView(
-      //   children: [
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 1'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 2'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 3'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 1'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 2'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 3'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 1'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 2'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 3'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 1'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 2'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 3'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 1'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 2'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 3'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 1'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 2'),
-      //       ),
-      //     ),
-      //     SizedBox(
-      //       height: 100,
-      //       width: 100,
-      //       child: Center(
-      //         child: Text('Box 3'),
-      //       ),
-      //     ),
-      //   ],
-      // ),
-      // body: ListView.builder(
-      //   itemCount: 1000, // 0-999
-      //   itemBuilder: (context, index) {
-      //     return SizedBox(
-      //       width: 100,
-      //       height: 100,
-      //       child: Center(child: Text(index.toString())),
-      //     );
-      //   },
-      // ),
-      // body: ListView.builder(
-      //   itemCount: friendList.length,
-      //   // scrollDirection: Axis.horizontal,
-      //   itemBuilder: (context, index) {
-      //     return Text(friendList[index]);
-      //   },
-      // ),
-      body: ListView.separated(
-        itemCount: friendList.length,
-        // scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return ListTile(
-            tileColor: Colors.grey.shade50,
-            title: Text(friendList[index]),
-            subtitle: Text('School friend'),
-            trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.do_not_disturb_on_total_silence, color: Colors.green, size: 10,),
-                Text('Active')
-              ],
-            ),
-            leading: Text((index+1).toString()),
-            onTap: () {
-              print('$index item tapped');
-            },
-            titleTextStyle: TextStyle(
-                fontSize: 18,
-                color: Colors.red
-            ),
-          );
-        },
-        separatorBuilder: (context, index) {
-          return Divider(
-            color: Colors.grey.shade200,
-            thickness: 2,
-            endIndent: 16,
-            indent: 4,
-          );
-          // return Text('This is $index separator');
-        },
-      ),
-      // body: GridView.builder(
-      //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      //     crossAxisCount: 3,
-      //     crossAxisSpacing: 4,
-      //     mainAxisSpacing: 10,
-      //     childAspectRatio: 1
-      //   ),
-      //   itemCount: friendList.length,
-      //   itemBuilder: (context, index) {
-      //     return Column(
-      //       children: [
-      //         Text(index.toString()),
-      //         Text(friendList[index]),
-      //       ],
-      //     );
-      //   },
-      // ),
-      // body: GridView.builder(
-      //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      //     crossAxisCount: 3,
-      //     crossAxisSpacing: 4,
-      //     mainAxisSpacing: 10,
-      //     childAspectRatio: 1
-      //   ),
-      //   itemCount: friendList.length,
-      //   itemBuilder: (context, index) {
-      //     return Column(
-      //       children: [
-      //         Text(index.toString()),
-      //         Text(friendList[index]),
-      //       ],
-      //     );
-      //   },
-      // ),
     );
   }
 }
