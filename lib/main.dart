@@ -1,86 +1,54 @@
-// Current SDK version: 3.22.1
-import 'package:flutter/cupertino.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:my_flutter_app/profile_page.dart';
-
-
-// TextField
 
 void main() {
-  runApp(IntroApp());
+  runApp(
+    DevicePreview(
+      enabled: true,
+      builder: (context) => MyApp(), // Wrap your app
+    ),
+  );
 }
 
-class IntroApp extends StatelessWidget {
-  const IntroApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      debugShowCheckedModeBanner: true,
-      home: ProfilePage(),
-      title: 'Intro app',
-      // theme: ThemeData(
-      //     brightness: Brightness.light,
-      //     appBarTheme: AppBarTheme(
-      //         backgroundColor: Colors.pink,
-      //         titleTextStyle: TextStyle(
-      //             color: Colors.white,
-      //             fontSize: 22,
-      //             fontWeight: FontWeight.w700,
-      //             letterSpacing: 1.2)),
-      //     textButtonTheme: TextButtonThemeData(
-      //         style: TextButton.styleFrom(
-      //             foregroundColor: Colors.pink,
-      //             textStyle:
-      //                 TextStyle(fontSize: 16, fontWeight: FontWeight.w700))),
-      //     inputDecorationTheme: InputDecorationTheme(
-      //       border: OutlineInputBorder(
-      //           borderRadius: BorderRadius.circular(8),
-      //           borderSide: BorderSide(color: Colors.green, width: 2)),
-      //       disabledBorder: OutlineInputBorder(
-      //           borderRadius: BorderRadius.circular(8),
-      //           borderSide: BorderSide(color: Colors.green, width: 2)),
-      //       focusedBorder: OutlineInputBorder(
-      //           borderRadius: BorderRadius.circular(8),
-      //           borderSide: BorderSide(color: Colors.blueAccent, width: 2)),
-      //       labelStyle: TextStyle(fontSize: 16),
-      //       hintStyle: TextStyle(color: Colors.purple.shade200),
-      //     ),
-      //     textTheme: TextTheme(bodySmall: TextStyle(fontSize: 28))),
-      // darkTheme: ThemeData(
-      //     brightness: Brightness.dark,
-      //     appBarTheme: AppBarTheme(
-      //         backgroundColor: Colors.green,
-      //         titleTextStyle: TextStyle(
-      //             color: Colors.white,
-      //             fontSize: 22,
-      //             fontWeight: FontWeight.w700,
-      //             letterSpacing: 1.2)),
-      //     textButtonTheme: TextButtonThemeData(
-      //         style: TextButton.styleFrom(
-      //             foregroundColor: Colors.green,
-      //             textStyle:
-      //                 TextStyle(fontSize: 16, fontWeight: FontWeight.w700))),
-      //     inputDecorationTheme: InputDecorationTheme(
-      //       border: OutlineInputBorder(
-      //           borderRadius: BorderRadius.circular(8),
-      //           borderSide: BorderSide(color: Colors.green, width: 2)),
-      //       disabledBorder: OutlineInputBorder(
-      //           borderRadius: BorderRadius.circular(8),
-      //           borderSide: BorderSide(color: Colors.green, width: 2)),
-      //       focusedBorder: OutlineInputBorder(
-      //           borderRadius: BorderRadius.circular(8),
-      //           borderSide: BorderSide(color: Colors.blueAccent, width: 2)),
-      //       labelStyle: TextStyle(fontSize: 16),
-      //       hintStyle: TextStyle(color: Colors.purple.shade200),
-      //     ),
-      //     textTheme: TextTheme(
-      //         bodySmall: TextStyle(fontSize: 20),
-      //         titleLarge: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
-      //         titleMedium: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-      //         titleSmall:
-      //             TextStyle(fontSize: 18, fontWeight: FontWeight.w600))),
-      // themeMode: ThemeMode.dark,
+    return MaterialApp(
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      home: Home(),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+        backgroundColor: Colors.blue,
+      ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        color: Colors.lightBlueAccent,
+        child: FractionallySizedBox(
+
+          widthFactor: 0.9,
+          heightFactor: 0.95,
+          child: Container(
+            color: Colors.green,
+          ),
+        ),
+      ),
     );
   }
 }
