@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'MyBagScreen.dart';
-
+import 'package:firstappofmine/app.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const CrudApp());
 }
-
-
