@@ -6,13 +6,19 @@ analyzer:
   enable-experiment:
     - super-parameters
 dependencies:
-
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.5
   fl_chart: ^0.40.0
-
   device_preview: ^1.2.0
   material: any  # Always use the latest available version
+
+flutter:
+  assets:
+    - assets/Pullover.jpg
+    - assets/T-Shirt.jpg
+    - assets/Sports_Dress.jpg
+
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you want to publish to pub.dev
